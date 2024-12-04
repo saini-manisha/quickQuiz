@@ -55,11 +55,12 @@ let getNewQuestion=()=>{
 
     if(availableQuestion.length===0 || questionCounter>=MAX_QUESTION){
         //going to end page
+        localStorage.setItem("mostRecentScore",score);
         return window.location.assign("end.html")
     }
     questionCounter++;
     progressText.innerText=`Question ${questionCounter} / ${MAX_QUESTION}`;
-    scoreText.innerText=`${score}`;
+    
     // update the progress bar full
 
     progressBarFull.style.width=((questionCounter/MAX_QUESTION)*100)+"%";
@@ -90,6 +91,7 @@ choices.forEach((choice)=>{
         selectedChoice.parentElement.classList.add(classToApply);
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply);
+            scoreText.innerText=`${score}`;
             getNewQuestion();   
         }, 500);
         
